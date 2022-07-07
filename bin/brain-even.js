@@ -51,7 +51,7 @@ function startGameCheckEven() {
       if (!isEven) {
         counterCorrectAnswers += 1;
         console.log(`${msgAnswer} ${answer}\n${msgCorrect}`);
-        startGameEven(username);
+        startGameCheckEven(username);
         break;
       } else {
         console.log(`${msgAnswer} ${answer}`);
