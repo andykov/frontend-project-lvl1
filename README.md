@@ -8,3 +8,6 @@ Example Win
 
 Example Game Over
 [![asciicast](https://asciinema.org/a/ckYbw6C8phaV1eC0wPNpw2pRd.svg)](https://asciinema.org/a/ckYbw6C8phaV1eC0wPNpw2pRd)
+
+Example Incorrect Data
+[![asciicast](https://asciinema.org/a/bxhjOlnjjXisBlCd8F7Ssy8dB.svg)](https://asciinema.org/a/bxhjOlnjjXisBlCd8F7Ssy8dB)
