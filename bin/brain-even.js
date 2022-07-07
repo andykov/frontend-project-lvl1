@@ -17,6 +17,14 @@ function checkNumberIsEven(number) {
   return number % 2 === 0;
 }
 
+function msgAnswer(answer) {
+  return `Your answer: ${answer}`;
+}
+
+function msgCorrect(answer) {
+  return `${msgAnswer(answer)}\n'Correct!'`;
+}
+
 function msgFail(isEven, answer, userName) {
   return `'${answer}' is wrong answer ;(. Correct answer was '${
     isEven ? 'yes' : 'no'
@@ -32,30 +40,33 @@ function startGameCheckEven() {
   const number = generateNumber();
   const isEven = checkNumberIsEven(number);
   const answer = readlineSync.question(`Question: ${number} `).toLowerCase();
-  const msgAnswer = 'Your answer:';
-  const msgCorrect = 'Correct!';
+
+  const handlerValid = () => {
+    counterCorrectAnswers += 1;
+    console.log(`${msgCorrect(answer)}`);
+    startGameCheckEven(username);
+  };
+
+  const handlerGameOver = () => {
+    console.log(`${msgAnswer(answer)}`);
+    console.log(msgFail(isEven, answer, username));
+  };
 
   switch (answer) {
     case 'yes':
       if (isEven) {
-        counterCorrectAnswers += 1;
-        console.log(`${msgAnswer} ${answer}\n${msgCorrect}`);
-        startGameCheckEven(username);
+        handlerValid();
         break;
       } else {
-        console.log(`${msgAnswer} ${answer}`);
-        console.log(msgFail(isEven, answer, username));
+        handlerGameOver();
         break;
       }
     case 'no':
       if (!isEven) {
-        counterCorrectAnswers += 1;
-        console.log(`${msgAnswer} ${answer}\n${msgCorrect}`);
-        startGameCheckEven(username);
+        handlerValid();
         break;
       } else {
-        console.log(`${msgAnswer} ${answer}`);
-        console.log(msgFail(isEven, answer, username));
+        handlerGameOver();
         break;
       }
     default:
@@ -68,6 +79,6 @@ function startGameCheckEven() {
 
 startGameCheckEven();
 
-// const start = startGameCheckEven();
+// const start = startGameEven();
 // start();
-// export default () => startGameCheckEven;
+// export default () => startGameEven;
