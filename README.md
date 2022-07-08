@@ -21,3 +21,11 @@ Example Win
 
 Example Game Over
 [![asciicast](https://asciinema.org/a/jfnaT8SuKovcUoMnHJzXPd3Bo.svg)](https://asciinema.org/a/jfnaT8SuKovcUoMnHJzXPd3Bo)
+
+## Game "GCD" - Наибольший общий делитель (НОД)
+
+Example Win
+[![asciicast](https://asciinema.org/a/yc9VCDpg9Kr26rXi3t8T5iMwo.svg)](https://asciinema.org/a/yc9VCDpg9Kr26rXi3t8T5iMwo)
+
+Example Game Over
+[![asciicast](https://asciinema.org/a/YQZv7X21PJtIg73ndSy5JmC8b.svg)](https://asciinema.org/a/YQZv7X21PJtIg73ndSy5JmC8b)
