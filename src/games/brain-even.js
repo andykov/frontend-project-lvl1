@@ -107,6 +107,7 @@ function startGameCheckEven() {
     // console.log(msgFail(answer, resultCorrect, username));
   }
 
+  return false;
   // if (counterCorrectAnswers === winScore) {
   //   console.log(`Congratulations, ${username}!`);
   //   return false;
