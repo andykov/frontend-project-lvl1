@@ -1,4 +1,3 @@
-// import readlineSync from 'readline-sync';
 import getUserName from '../cli.js';
 import {
   handlerGetAnswer,
@@ -53,13 +52,13 @@ function startGameCalc() {
   console.log(msgAnswer(answer));
   startGameCalc();
   // продолжаем или завершаем игру
-  // if (isValidAnswer) {
-  //   winScore += 1;
-  //   console.log('Correct!');
-  //   startGameCalc();
-  // } else {
-  //   console.log(msgFail(answer, resultCorrect, username));
-  // }
+  if (isValidAnswer) {
+    winScore += 1;
+    console.log('Correct!');
+    startGameCalc();
+  } else {
+    console.log(msgFail(answer, resultCorrect, username));
+  }
 
   return false;
 }
