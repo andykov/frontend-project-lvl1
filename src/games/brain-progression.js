@@ -14,7 +14,7 @@ console.log(`Hello, ${username}!`);
 console.log('What is the result of the expression?');
 
 // Генерируем прогрессию
-function defineProgression(start, distance, size = 5, hide = -1) {
+function defineProgression(start, distance, size = 5) {
   const result = [];
   let sum = start;
 
@@ -23,11 +23,16 @@ function defineProgression(start, distance, size = 5, hide = -1) {
     sum += distance;
   }
 
-  if (hide >= 0) {
-    result[hide] = '..';
-  }
-
   return result;
+}
+
+// скрытие произвольного числа
+function progressionWithHiddenNumber(progression, hide) {
+  const copy = [...progression];
+  if (hide >= 0) {
+    copy[hide] = '..';
+  }
+  return copy;
 }
 
 // Находим дистанцию между числами
@@ -49,21 +54,27 @@ function startGameProgression() {
     return false;
   }
 
-  // рандомно выбираем оператор для выражения
+  // рандомный размер прогрессии
   const randomSize = getRandomNumber(5, 10);
+  // рандомный индекс для скрытия числа
   const randomHide = getRandomNumber(0, randomSize);
-  const progression = defineProgression(0, 2, randomSize, randomHide);
-  const progressionString = progression.join(' ');
-
+  // генерация прогрессии
+  const progression = defineProgression(0, 2, randomSize);
+  // скрытие числа
+  const progressionHidden = progressionWithHiddenNumber(
+    progression,
+    randomHide
+  );
+  // находим дистанцию
   const distance = getDistanceOfProgression(progression);
-  // находим верный ответ
+  // находим скрытое число
   const resultCorrect = findNumberOfProgression(
     progression,
     distance,
     randomHide
   );
   // данные для вопроса
-  const expression = `${progressionString}`;
+  const expression = `${progressionHidden.join(' ')}`;
   // спрашиваем и получаем ответ
   const answer = handlerGetAnswer(TYPE_PROGRESSION, expression);
   // проверяем ответ
