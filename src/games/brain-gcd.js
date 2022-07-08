@@ -29,9 +29,6 @@ function getGcd(a, b) {
   const result = max % min;
 
   if (result === 0) {
-    console.log(`-----------`);
-    console.log(`-----${min}-----`);
-    console.log(`-----------`);
     return min;
   }
   return getGcd(b, result);
