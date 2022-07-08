@@ -14,16 +14,17 @@ function handlerAskQuestion(type, data) {
   }
   const message = `Question: ${data} `;
 
+  // задаем вопрос по типу и возвращаем ответ
   return () => {
     if (type === 'calc') {
-      // задаем вопрос и возвращаем ответ
       return readlineSync.questionInt(message);
     }
     if (type === 'even') {
-      // задаем вопрос и возвращаем ответ
       return readlineSync.question(message).toLowerCase();
     }
-
+    if (type === 'gcd') {
+      return readlineSync.questionInt(message);
+    }
     return false;
   };
 }

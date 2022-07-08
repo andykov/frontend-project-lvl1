@@ -50,7 +50,7 @@ function startGameCalc() {
   // проверяем ответ
   const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
   console.log(msgAnswer(answer));
-  startGameCalc();
+
   // продолжаем или завершаем игру
   if (isValidAnswer) {
     winScore += 1;
