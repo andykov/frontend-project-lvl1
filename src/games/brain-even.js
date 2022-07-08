@@ -22,7 +22,6 @@ function startGameCheckEven() {
     return false;
   }
 
-  // let isEven = null;
   // данные для вопроса
   const number = getRandomNumber();
 

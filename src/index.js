@@ -35,7 +35,7 @@ function handlerAskQuestion(type, data) {
       return readlineSync.questionInt(message);
     }
     if (type === TYPE_PRIME) {
-      return readlineSync.questionInt(message);
+      return readlineSync.question(message).toLowerCase();
     }
     return false;
   };
