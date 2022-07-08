@@ -29,7 +29,7 @@ function startGameCalc() {
   const operandAfter = getRandomNumber();
   let resultCorrect = null;
 
-  // вычисляем выражения
+  // вычисляем выражение по типу операции
   switch (selectOperation) {
     case '+':
       resultCorrect = operandBefore + operandAfter;
@@ -44,9 +44,9 @@ function startGameCalc() {
       break;
   }
 
-  // выражение для вопроса
+  // данные для вопроса
   const expression = `${operandBefore} ${selectOperation} ${operandAfter}`;
-  // получаем ответ
+  // спрашиваем и получаем ответ
   const answer = handlerGetAnswer('calc', expression);
   // проверяем ответ
   const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
