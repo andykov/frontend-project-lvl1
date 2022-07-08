@@ -40,32 +40,30 @@ function startGamePrimeNumber() {
   console.log('number', number);
   // находим верный ответ
   const isPrime = isPrimeNumber(number);
+  console.log(`-------------`);
+  console.log(`----${isPrime ? 'yes' : 'no'}----`);
+  console.log(`-------------`);
   // данные для вопроса
   const expression = `${number}`;
   // спрашиваем и получаем ответ
   const answer = handlerGetAnswer(TYPE_PRIME, expression);
 
-  console.log('ПОЛУЧИЛИ ОТВЕТ', answer);
   let resultCorrect = null;
   switch (answer) {
     case 'yes':
       if (isPrime) {
         resultCorrect = 'yes';
-        console.log('Верный ответ');
         break;
       } else {
         resultCorrect = 'no';
-        console.log('НЕ верный ответ');
         break;
       }
     case 'no':
       if (!isPrime) {
         resultCorrect = 'no';
-        console.log('Верный ответ');
         break;
       } else {
         resultCorrect = 'yes';
-        console.log('НЕ верный ответ');
         break;
       }
     default:

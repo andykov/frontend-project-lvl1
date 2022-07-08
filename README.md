@@ -1,7 +1,29 @@
-### Hexlet tests and linter status:
+### nodejs-package
 
 [![Actions Status](https://github.com/andykov/frontend-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/andykov/frontend-project-lvl1/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d2155f5f50a63dbbbdd/maintainability)](https://codeclimate.com/github/andykov/frontend-project-lvl1/maintainability)
+
+## Install
+
+Type in root directory
+
+```bash
+make install
+npm link
+```
+
+## Run Games
+
+Type in root directory
+
+```bash
+brain-even
+# or
+brain-calc
+brain-gcd
+brain-progression
+brain-prime
+```
 
 ## Game "Even or Odd Number" - Проверка на чётность
 
@@ -51,3 +73,13 @@ Example Win
 
 Example Game Over
 [![asciicast](https://asciinema.org/a/QWHCyjenGmHzg2tcdhlDJxlVC.svg)](https://asciinema.org/a/QWHCyjenGmHzg2tcdhlDJxlVC)
+
+## Game "Prime Number" - Простое ли число?
+
+Игроку показывается случайное число. Нужно ответить **yes**, если число простое, или **no** — если составное
+
+Example Win
+[![asciicast](https://asciinema.org/a/xBz6ECZvzqWgbBDFUvJWwcyLn.svg)](https://asciinema.org/a/xBz6ECZvzqWgbBDFUvJWwcyLn)
+
+Example Game Over
+[![asciicast](https://asciinema.org/a/m5A38Dgel0xFi91xjWvq36nif.svg)](https://asciinema.org/a/m5A38Dgel0xFi91xjWvq36nif)
