@@ -6,6 +6,7 @@ import {
   msgAnswer,
   msgFail,
   ROUNDS,
+  TYPE_EVEN,
 } from '../index.js';
 
 const username = getUserName();
@@ -29,7 +30,7 @@ function startGameCheckEven() {
   const isEven = number % 2 === 0;
 
   // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer('even', number);
+  const answer = handlerGetAnswer(TYPE_EVEN, number);
   let resultCorrect = null;
 
   switch (answer) {

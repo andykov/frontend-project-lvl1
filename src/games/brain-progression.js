@@ -6,6 +6,7 @@ import {
   msgAnswer,
   msgFail,
   ROUNDS,
+  TYPE_PROGRESSION,
 } from '../index.js';
 
 const username = getUserName();
@@ -64,7 +65,7 @@ function startGameProgression() {
   // данные для вопроса
   const expression = `${progressionString}`;
   // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer('progression', expression);
+  const answer = handlerGetAnswer(TYPE_PROGRESSION, expression);
   // проверяем ответ
   const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
   console.log(msgAnswer(answer));

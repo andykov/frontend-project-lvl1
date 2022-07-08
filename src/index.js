@@ -1,6 +1,10 @@
 import readlineSync from 'readline-sync';
 
 const ROUNDS = 3;
+const TYPE_CALC = 'calc';
+const TYPE_EVEN = 'even';
+const TYPE_GCD = 'gcd';
+const TYPE_PROGRESSION = 'progression';
 
 // рандмное число от 0 до max
 function getRandomNumber(min = 0, max = 1000) {
@@ -17,16 +21,16 @@ function handlerAskQuestion(type, data) {
 
   // задаем вопрос по типу и возвращаем ответ
   return () => {
-    if (type === 'calc') {
+    if (type === TYPE_CALC) {
       return readlineSync.questionInt(message);
     }
-    if (type === 'even') {
+    if (type === TYPE_EVEN) {
       return readlineSync.question(message).toLowerCase();
     }
-    if (type === 'gcd') {
+    if (type === TYPE_GCD) {
       return readlineSync.questionInt(message);
     }
-    if (type === 'progression') {
+    if (type === TYPE_PROGRESSION) {
       return readlineSync.questionInt(message);
     }
     return false;
@@ -61,6 +65,10 @@ function counter() {
 
 export {
   ROUNDS,
+  TYPE_CALC,
+  TYPE_EVEN,
+  TYPE_GCD,
+  TYPE_PROGRESSION,
   handlerAskQuestion,
   handlerGetAnswer,
   handlerCompareAnswer,

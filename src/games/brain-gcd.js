@@ -6,6 +6,7 @@ import {
   msgAnswer,
   msgFail,
   ROUNDS,
+  TYPE_GCD,
 } from '../index.js';
 
 const username = getUserName();
@@ -52,7 +53,7 @@ function startGameGcd() {
   // данные для вопроса
   const expression = `${numberOne} ${numberTwo}`;
   // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer('gcd', expression);
+  const answer = handlerGetAnswer(TYPE_GCD, expression);
   // проверяем ответ
   const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
   console.log(msgAnswer(answer));

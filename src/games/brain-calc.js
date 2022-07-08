@@ -6,6 +6,7 @@ import {
   msgAnswer,
   msgFail,
   ROUNDS,
+  TYPE_CALC,
 } from '../index.js';
 
 const username = getUserName();
@@ -46,7 +47,7 @@ function startGameCalc() {
   // данные для вопроса
   const expression = `${operandBefore} ${selectOperation} ${operandAfter}`;
   // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer('calc', expression);
+  const answer = handlerGetAnswer(TYPE_CALC, expression);
   // проверяем ответ
   const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
   console.log(msgAnswer(answer));
