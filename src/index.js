@@ -5,6 +5,7 @@ const TYPE_CALC = 'calc';
 const TYPE_EVEN = 'even';
 const TYPE_GCD = 'gcd';
 const TYPE_PROGRESSION = 'progression';
+const TYPE_PRIME = 'prime';
 
 // рандмное число от 0 до max
 function getRandomNumber(min = 0, max = 1000) {
@@ -31,6 +32,9 @@ function handlerAskQuestion(type, data) {
       return readlineSync.questionInt(message);
     }
     if (type === TYPE_PROGRESSION) {
+      return readlineSync.questionInt(message);
+    }
+    if (type === TYPE_PRIME) {
       return readlineSync.questionInt(message);
     }
     return false;
@@ -69,6 +73,7 @@ export {
   TYPE_EVEN,
   TYPE_GCD,
   TYPE_PROGRESSION,
+  TYPE_PRIME,
   handlerAskQuestion,
   handlerGetAnswer,
   handlerCompareAnswer,

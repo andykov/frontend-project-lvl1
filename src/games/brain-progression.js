@@ -11,7 +11,7 @@ import {
 
 const username = getUserName();
 console.log(`Hello, ${username}!`);
-console.log('What is the result of the expression?');
+console.log('What number is missing in the progression?');
 
 // Генерируем прогрессию
 function defineProgression(start, distance, size = 5) {
