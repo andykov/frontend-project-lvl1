@@ -38,8 +38,8 @@ function startGameCheckEven() {
 
   const number = generateNumber();
   const isEven = checkNumberIsEven(number);
-  const answer = readlineSync.question(`Question: ${number} `).toLowerCase();
-
+  const answer = readlineSync.question(`Question: ${number} `);
+  console.log('answer=', answer, typeof answer);
   const handlerValid = () => {
     counterCorrectAnswers += 1;
     console.log(`${msgCorrect(answer)}`);
