@@ -24,7 +24,7 @@ function startGameCalc() {
 
   // рандомно выбираем оператор для выражения
   const operations = ['+', '-', '*'];
-  const selectOperation = operations[getRandomNumber(2)];
+  const selectOperation = operations[getRandomNumber(3)];
   const operandBefore = getRandomNumber();
   const operandAfter = getRandomNumber();
   let resultCorrect = null;
@@ -51,15 +51,15 @@ function startGameCalc() {
   // проверяем ответ
   const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
   console.log(msgAnswer(answer));
-
+  startGameCalc();
   // продолжаем или завершаем игру
-  if (isValidAnswer) {
-    winScore += 1;
-    console.log('Correct!');
-    startGameCalc();
-  } else {
-    console.log(msgFail(answer, resultCorrect, username));
-  }
+  // if (isValidAnswer) {
+  //   winScore += 1;
+  //   console.log('Correct!');
+  //   startGameCalc();
+  // } else {
+  //   console.log(msgFail(answer, resultCorrect, username));
+  // }
 
   return false;
 }
