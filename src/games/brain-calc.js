@@ -23,14 +23,10 @@ function startGameCalc() {
   }
 
   // рандомно выбираем оператор для выражения
-  const tmpExp = [2, 5, 3];
-  const selecttmpExpBefore = tmpExp[getRandomNumber(2)];
-  const selecttmpExpAfter = tmpExp[getRandomNumber(2)];
-
   const operations = ['+', '-', '*'];
   const selectOperation = operations[getRandomNumber(2)];
-  const operandBefore = selecttmpExpBefore;
-  const operandAfter = selecttmpExpAfter;
+  const operandBefore = getRandomNumber();
+  const operandAfter = getRandomNumber();
   let resultCorrect = null;
 
   // вычисляем выражение по типу операции
@@ -49,7 +45,7 @@ function startGameCalc() {
   }
 
   // данные для вопроса
-  const expression = `${selecttmpExpBefore} ${selectOperation} ${selecttmpExpAfter}`;
+  const expression = `${operandBefore} ${selectOperation} ${operandAfter}`;
   // спрашиваем и получаем ответ
   const answer = handlerGetAnswer('calc', expression);
   // проверяем ответ
