@@ -75,6 +75,9 @@ function startGameProgression() {
   );
   // данные для вопроса
   const expression = `${progressionHidden.join(' ')}`;
+  console.log(`--------------`);
+  console.log(`------${resultCorrect}------`);
+  console.log(`--------------`);
   // спрашиваем и получаем ответ
   const answer = handlerGetAnswer(TYPE_PROGRESSION, expression);
   // проверяем ответ
