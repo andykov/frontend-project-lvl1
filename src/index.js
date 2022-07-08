@@ -3,8 +3,9 @@ import readlineSync from 'readline-sync';
 const ROUNDS = 3;
 
 // рандмное число от 0 до max
-function getRandomNumber(max = 1000) {
-  return Math.floor(Math.random() * max);
+function getRandomNumber(min = 0, max = 1000) {
+  const number = min + Math.random() * (max + 1 - min);
+  return Math.floor(number);
 }
 
 function handlerAskQuestion(type, data) {
@@ -23,6 +24,9 @@ function handlerAskQuestion(type, data) {
       return readlineSync.question(message).toLowerCase();
     }
     if (type === 'gcd') {
+      return readlineSync.questionInt(message);
+    }
+    if (type === 'progression') {
       return readlineSync.questionInt(message);
     }
     return false;
