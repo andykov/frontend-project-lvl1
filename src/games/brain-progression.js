@@ -1,16 +1,20 @@
-import getUserName from '../cli.js';
 import {
-  handlerGetAnswer,
-  handlerCompareAnswer,
+  ROUNDS_MAX,
+  GAME_PROGRESSION,
+  MSG_WINNER,
+  MSG_WELCOME,
+} from '../constants.js';
+import {
+  getUserName,
+  getUserAnswer,
   getRandomNumber,
-  msgAnswer,
+  isSameAnswer,
   msgFail,
-  ROUNDS,
-  TYPE_PROGRESSION,
 } from '../index.js';
 
-const username = getUserName();
-console.log(`Hello, ${username}!`);
+console.log(MSG_WELCOME);
+const userName = getUserName();
+console.log(`Hello, ${userName}!`);
 console.log('What number is missing in the progression?');
 
 // Генерируем прогрессию
@@ -26,7 +30,7 @@ function defineProgression(start, distance, size = 5) {
   return result;
 }
 
-// скрытие произвольного числа
+// Скрытие произвольного числа прогрессии
 function progressionWithHiddenNumber(progression, hide) {
   const copy = [...progression];
   if (hide >= 0) {
@@ -48,9 +52,10 @@ function findNumberOfProgression(progression, distance, target) {
 let winScore = 0;
 
 function startGameProgression() {
-  // проверка раунда
-  if (winScore === ROUNDS) {
-    console.log(`Congratulations, ${username}!`);
+  if (winScore === ROUNDS_MAX) {
+    // MSG_WINNER(userName);
+    // console.log(`Congratulations, ${userName}!`);
+    console.log(`${MSG_WINNER}, ${userName}!`);
     return false;
   }
 
@@ -60,34 +65,30 @@ function startGameProgression() {
   const randomHide = getRandomNumber(0, randomSize);
   // генерация прогрессии
   const progression = defineProgression(0, 2, randomSize);
-  // скрытие числа
+  // скрытие и возврат числа
   const progressionHidden = progressionWithHiddenNumber(
     progression,
     randomHide
   );
   // находим дистанцию
   const distance = getDistanceOfProgression(progression);
+  // Преобразуем в строку через пробел
+  const expression = `${progressionHidden.join(' ')}`;
   // находим скрытое число
-  const resultCorrect = findNumberOfProgression(
+  const expectedAnswer = findNumberOfProgression(
     progression,
     distance,
     randomHide
   );
-  // данные для вопроса
-  const expression = `${progressionHidden.join(' ')}`;
   // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer(TYPE_PROGRESSION, expression);
-  // проверяем ответ
-  const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
-  console.log(msgAnswer(answer));
+  const userAnswer = getUserAnswer(GAME_PROGRESSION, expression);
 
-  // продолжаем или завершаем игру
-  if (isValidAnswer) {
+  if (isSameAnswer(userAnswer, expectedAnswer)) {
     winScore += 1;
     console.log('Correct!');
     startGameProgression();
   } else {
-    console.log(msgFail(answer, resultCorrect, username));
+    console.log(msgFail(userAnswer, expectedAnswer, userName));
   }
 
   return false;

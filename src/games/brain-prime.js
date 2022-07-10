@@ -1,16 +1,20 @@
-import getUserName from '../cli.js';
 import {
-  handlerGetAnswer,
-  handlerCompareAnswer,
+  ROUNDS_MAX,
+  GAME_PRIME,
+  MSG_WINNER,
+  MSG_WELCOME,
+} from '../constants.js';
+import {
+  getUserName,
+  getUserAnswer,
   getRandomNumber,
-  msgAnswer,
+  isSameAnswer,
   msgFail,
-  ROUNDS,
-  TYPE_PRIME,
 } from '../index.js';
 
-const username = getUserName();
-console.log(`Hello, ${username}!`);
+console.log(MSG_WELCOME);
+const userName = getUserName();
+console.log(`Hello, ${userName}!`);
 console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
 
 function isPrimeNumber(num) {
@@ -29,58 +33,23 @@ function isPrimeNumber(num) {
 let winScore = 0;
 
 function startGamePrimeNumber() {
-  // проверка раунда
-  if (winScore === ROUNDS) {
-    console.log(`Congratulations, ${username}!`);
+  if (winScore === ROUNDS_MAX) {
+    // MSG_WINNER(userName);
+    // console.log(`Congratulations, ${userName}!`);
+    console.log(`${MSG_WINNER}, ${userName}!`);
     return false;
   }
 
-  // рандомное число в пределах 100
-  const number = getRandomNumber(0, 100);
-  console.log('number', number);
-  // находим верный ответ
-  const isPrime = isPrimeNumber(number);
-  console.log(`-------------`);
-  console.log(`----${isPrime ? 'yes' : 'no'}----`);
-  console.log(`-------------`);
-  // данные для вопроса
-  const expression = `${number}`;
-  // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer(TYPE_PRIME, expression);
+  const randomNumber = getRandomNumber(0, 100);
+  const expectedAnswer = isPrimeNumber(randomNumber) ? 'yes' : 'no';
+  const userAnswer = getUserAnswer(GAME_PRIME, randomNumber);
 
-  let resultCorrect = null;
-  switch (answer) {
-    case 'yes':
-      if (isPrime) {
-        resultCorrect = 'yes';
-        break;
-      } else {
-        resultCorrect = 'no';
-        break;
-      }
-    case 'no':
-      if (!isPrime) {
-        resultCorrect = 'no';
-        break;
-      } else {
-        resultCorrect = 'yes';
-        break;
-      }
-    default:
-      break;
-  }
-
-  // проверяем ответ
-  const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
-  console.log(msgAnswer(answer));
-
-  // продолжаем или завершаем игру
-  if (isValidAnswer) {
+  if (isSameAnswer(userAnswer, expectedAnswer)) {
     winScore += 1;
     console.log('Correct!');
     startGamePrimeNumber();
   } else {
-    console.log(msgFail(answer, resultCorrect ? 'yes' : 'no', username));
+    console.log(msgFail(userAnswer, expectedAnswer, userName));
   }
 
   return false;

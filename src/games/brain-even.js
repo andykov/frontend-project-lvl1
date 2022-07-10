@@ -1,72 +1,46 @@
-import getUserName from '../cli.js';
 import {
-  handlerGetAnswer,
-  handlerCompareAnswer,
+  ROUNDS_MAX,
+  GAME_EVEN,
+  MSG_WINNER,
+  MSG_WELCOME,
+} from '../constants.js';
+import {
+  getUserName,
+  getUserAnswer,
   getRandomNumber,
-  msgAnswer,
+  isSameAnswer,
   msgFail,
-  ROUNDS,
-  TYPE_EVEN,
 } from '../index.js';
 
-const username = getUserName();
-console.log(`Hello, ${username}!`);
+console.log(MSG_WELCOME);
+const userName = getUserName();
+console.log(`Hello, ${userName}!`);
 console.log('Answer "yes" if the number is even, otherwise answer "no".');
+
+function isEvenNumber(number) {
+  return number % 2 === 0;
+}
 
 let winScore = 0;
 
 function startGameCheckEven() {
-  // проверка раунда
-  if (winScore === ROUNDS) {
-    console.log(`Congratulations, ${username}!`);
+  if (winScore === ROUNDS_MAX) {
+    // MSG_WINNER(userName);
+    // console.log(`Congratulations, ${userName}!`);
+    console.log(`${MSG_WINNER}, ${userName}!`);
     return false;
   }
 
-  // данные для вопроса
-  const number = getRandomNumber();
+  const randomNumber = getRandomNumber(0, 1000);
+  const expectedAnswer = isEvenNumber(randomNumber) ? 'yes' : 'no';
+  const userAnswer = getUserAnswer(GAME_EVEN, randomNumber);
 
-  // узнает правильный ответ
-  const isEven = number % 2 === 0;
-
-  // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer(TYPE_EVEN, number);
-  let resultCorrect = null;
-
-  switch (answer) {
-    case 'yes':
-      if (isEven) {
-        resultCorrect = 'yes';
-        console.log('Верный ответ');
-        break;
-      } else {
-        resultCorrect = 'no';
-        console.log('НЕ верный ответ');
-        break;
-      }
-    case 'no':
-      if (!isEven) {
-        resultCorrect = 'no';
-        console.log('Верный ответ');
-        break;
-      } else {
-        resultCorrect = 'yes';
-        console.log('НЕ верный ответ');
-        break;
-      }
-    default:
-      break;
-  }
-
-  // проверяем ответ
-  const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
-  console.log(msgAnswer(answer));
-
-  if (isValidAnswer) {
+  if (isSameAnswer(userAnswer, expectedAnswer)) {
     winScore += 1;
     console.log('Correct!');
     startGameCheckEven();
   } else {
-    console.log(msgFail(answer, isEven ? 'yes' : 'no', username));
+    console.log(msgFail(userAnswer, expectedAnswer, userName));
   }
 
   return false;

@@ -1,16 +1,15 @@
-import getUserName from '../cli.js';
+import { ROUNDS_MAX, GAME_GCD, MSG_WINNER, MSG_WELCOME } from '../constants.js';
 import {
-  handlerGetAnswer,
-  handlerCompareAnswer,
+  getUserName,
+  getUserAnswer,
   getRandomNumber,
-  msgAnswer,
+  isSameAnswer,
   msgFail,
-  ROUNDS,
-  TYPE_GCD,
 } from '../index.js';
 
-const username = getUserName();
-console.log(`Hello, ${username}!`);
+console.log(MSG_WELCOME);
+const userName = getUserName();
+console.log(`Hello, ${userName}!`);
 console.log('Find the greatest common divisor of given numbers.');
 
 /**
@@ -38,33 +37,25 @@ function getGcd(a, b) {
 let winScore = 0;
 
 function startGameGcd() {
-  // проверка раунда
-  if (winScore === ROUNDS) {
-    console.log(`Congratulations, ${username}!`);
+  if (winScore === ROUNDS_MAX) {
+    // MSG_WINNER(userName);
+    // console.log(`Congratulations, ${userName}!`);
+    console.log(`${MSG_WINNER}, ${userName}!`);
     return false;
   }
 
-  // рандомно выбираем оператор для выражения
-  const numberOne = getRandomNumber(100);
-  const numberTwo = getRandomNumber(100);
-  // находим верный ответ
-  const resultCorrect = getGcd(numberOne, numberTwo);
+  const randomNumberOne = getRandomNumber(100);
+  const randomNumberTwo = getRandomNumber(100);
+  const expectedAnswer = getGcd(randomNumberOne, randomNumberTwo);
+  const expression = `${randomNumberOne} ${randomNumberTwo}`;
+  const userAnswer = getUserAnswer(GAME_GCD, expression);
 
-  // данные для вопроса
-  const expression = `${numberOne} ${numberTwo}`;
-  // спрашиваем и получаем ответ
-  const answer = handlerGetAnswer(TYPE_GCD, expression);
-  // проверяем ответ
-  const isValidAnswer = handlerCompareAnswer(answer, resultCorrect);
-  console.log(msgAnswer(answer));
-
-  // продолжаем или завершаем игру
-  if (isValidAnswer) {
+  if (isSameAnswer(userAnswer, expectedAnswer)) {
     winScore += 1;
     console.log('Correct!');
     startGameGcd();
   } else {
-    console.log(msgFail(answer, resultCorrect, username));
+    console.log(msgFail(userAnswer, expectedAnswer, userName));
   }
 
   return false;
