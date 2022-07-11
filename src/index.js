@@ -1,16 +1,17 @@
 import readlineSync from 'readline-sync';
-import {
-  GAME_CALC,
-  GAME_EVEN,
-  GAME_GCD,
-  GAME_PROGRESSION,
-  GAME_PRIME,
-  MSG_GET_USERNAME,
-} from './constants.js';
+
+const ROUNDS_COUNT = 3;
+const GAME_CALC = 'calc';
+const GAME_EVEN = 'even';
+const GAME_GCD = 'gcd';
+const GAME_PROGRESSION = 'progression';
+const GAME_PRIME = 'prime';
 
 function getUserName() {
-  const username = readlineSync.question(MSG_GET_USERNAME);
-  return username;
+  console.log('Welcome to the Brain Games!');
+  const userName = readlineSync.question('May I have your name? ');
+  console.log(`Hello, ${userName}!`);
+  return userName;
 }
 
 function getRandomNumber(min = 0, max = 1000) {
@@ -56,11 +57,25 @@ function getUserAnswer(type, questionData) {
   return answer();
 }
 
-function isSameAnswer(userAnswer, expectedAnswer) {
-  return userAnswer === expectedAnswer;
+function isSameAnswer(userAnswer, expectedAnswer, userName) {
+  const result = userAnswer === expectedAnswer;
+
+  if (result) {
+    console.log('Correct!');
+  } else {
+    console.log(msgFail(userAnswer, expectedAnswer, userName));
+    // return false;
+  }
+  return result;
 }
 
 export {
+  ROUNDS_COUNT,
+  GAME_CALC,
+  GAME_EVEN,
+  GAME_GCD,
+  GAME_PROGRESSION,
+  GAME_PRIME,
   getUserName,
   sendUserQuestion,
   getUserAnswer,

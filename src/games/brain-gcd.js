@@ -1,16 +1,11 @@
-import { ROUNDS_MAX, GAME_GCD, MSG_WINNER, MSG_WELCOME } from '../constants.js';
 import {
+  ROUNDS_COUNT,
+  GAME_GCD,
   getUserName,
   getUserAnswer,
   getRandomNumber,
   isSameAnswer,
-  msgFail,
 } from '../index.js';
-
-console.log(MSG_WELCOME);
-const userName = getUserName();
-console.log(`Hello, ${userName}!`);
-console.log('Find the greatest common divisor of given numbers.');
 
 /**
  * @getGcd - Нахождение наибольшего общего делителя - алгоритм Евклида.
@@ -34,30 +29,27 @@ function getGcd(a, b) {
   return getGcd(b, result);
 }
 
-let winScore = 0;
-
 function startGameGcd() {
-  if (winScore === ROUNDS_MAX) {
-    // MSG_WINNER(userName);
-    // console.log(`Congratulations, ${userName}!`);
-    console.log(`${MSG_WINNER}, ${userName}!`);
-    return false;
+  const userName = getUserName();
+  console.log('Find the greatest common divisor of given numbers.');
+
+  for (let round = 0; round < ROUNDS_COUNT; round += 1) {
+    if (round === ROUNDS_COUNT) {
+      console.log(`Congratulations, ${userName}!`);
+      return false;
+    }
+
+    const randomNumberOne = getRandomNumber(100);
+    const randomNumberTwo = getRandomNumber(100);
+    const expectedAnswer = getGcd(randomNumberOne, randomNumberTwo);
+    const expression = `${randomNumberOne} ${randomNumberTwo}`;
+    const userAnswer = getUserAnswer(GAME_GCD, expression);
+
+    const result = isSameAnswer(userAnswer, expectedAnswer, userName);
+    if (!result) {
+      return false;
+    }
   }
-
-  const randomNumberOne = getRandomNumber(100);
-  const randomNumberTwo = getRandomNumber(100);
-  const expectedAnswer = getGcd(randomNumberOne, randomNumberTwo);
-  const expression = `${randomNumberOne} ${randomNumberTwo}`;
-  const userAnswer = getUserAnswer(GAME_GCD, expression);
-
-  if (isSameAnswer(userAnswer, expectedAnswer)) {
-    winScore += 1;
-    console.log('Correct!');
-    startGameGcd();
-  } else {
-    console.log(msgFail(userAnswer, expectedAnswer, userName));
-  }
-
   return false;
 }
 
